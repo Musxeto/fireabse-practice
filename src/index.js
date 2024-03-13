@@ -20,6 +20,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signOut,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -103,6 +104,8 @@ updateForm.addEventListener("submit", (e) => {
   });
 });
 
+const userHeading = document.querySelector(".username");
+
 const signupForm = document.querySelector(".signup");
 signupForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -121,6 +124,18 @@ signupForm.addEventListener("submit", (e) => {
 const loginForm = document.querySelector(".login");
 loginForm.addEventListener("submit", (e) => {
   e.preventDefault();
+
+  const email = loginForm.email.value;
+  const password = loginForm.password.value;
+  signInWithEmailAndPassword(auth, email, password)
+    .then((cred) => {
+      console.log("user logged in:", cred.user);
+      userHeading.innerText = "Current User: " + cred.user.email; // Update the DOM element here
+      loginForm.reset();
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
 });
 
 const logoutButton = document.querySelector(".logout");
@@ -128,6 +143,7 @@ logoutButton.addEventListener("click", () => {
   signOut(auth)
     .then(() => {
       console.log("user signed out");
+      userHeading.innerText = "No User Logged In";
     })
     .catch((err) => {
       console.log(err.message);
