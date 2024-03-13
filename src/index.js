@@ -82,3 +82,8 @@ const docRef = doc(db, "books", "a2mD6ahLZbaOt7ZQ3S1w");
 onSnapshot(docRef, (doc) => {
   console.log(doc.data(), doc.id);
 });
+
+const updateForm = document.querySelector(".update");
+updateForm.addEventListener("submit", (e) => {
+  e.preventDefault;
+});
