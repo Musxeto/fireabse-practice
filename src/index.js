@@ -21,6 +21,7 @@ import {
   createUserWithEmailAndPassword,
   signOut,
   signInWithEmailAndPassword,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -113,7 +114,7 @@ signupForm.addEventListener("submit", (e) => {
   const password = signupForm.password.value;
   createUserWithEmailAndPassword(auth, email, password)
     .then((cred) => {
-      console.log("User Created: ", cred.user);
+      // console.log("User Created: ", cred.user);
       signupForm.reset();
     })
     .catch((err) => {
@@ -129,7 +130,7 @@ loginForm.addEventListener("submit", (e) => {
   const password = loginForm.password.value;
   signInWithEmailAndPassword(auth, email, password)
     .then((cred) => {
-      console.log("user logged in:", cred.user);
+      // console.log("user logged in:", cred.user);
       userHeading.innerText = "Current User: " + cred.user.email; // Update the DOM element here
       loginForm.reset();
     })
@@ -142,10 +143,14 @@ const logoutButton = document.querySelector(".logout");
 logoutButton.addEventListener("click", () => {
   signOut(auth)
     .then(() => {
-      console.log("user signed out");
+      // console.log("user signed out");
       userHeading.innerText = "No User Logged In";
     })
     .catch((err) => {
       console.log(err.message);
     });
+});
+
+onAuthStateChanged(auth, (user) => {
+  console.log("user status changed", user);
 });
