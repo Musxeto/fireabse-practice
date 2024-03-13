@@ -54,7 +54,7 @@ const q = query(colRef, orderBy("createdAt"));
 //      console.log(err.message);
 //    });
 
-onSnapshot(q, (snapshot) => {
+const unsubCol = onSnapshot(q, (snapshot) => {
   let books = [];
   snapshot.docs.forEach((doc) => {
     books.push({ ...doc.data(), id: doc.id });
@@ -89,7 +89,7 @@ const docRef = doc(db, "books", "a2mD6ahLZbaOt7ZQ3S1w");
 //   console.log(doc.data(), doc.id);
 // });
 
-onSnapshot(docRef, (doc) => {
+const unsubDoc = onSnapshot(docRef, (doc) => {
   console.log(doc.data(), doc.id);
 });
 
@@ -151,6 +151,14 @@ logoutButton.addEventListener("click", () => {
     });
 });
 
-onAuthStateChanged(auth, (user) => {
+const unsubAuth = onAuthStateChanged(auth, (user) => {
   console.log("user status changed", user);
+});
+
+const unsubButton = document.querySelector(".unsub");
+unsubButton.addEventListener("click", (e) => {
+  console.log("unsubscribing");
+  unsubAuth();
+  unsubButton();
+  unsubCol();
 });
