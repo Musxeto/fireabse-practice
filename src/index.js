@@ -159,6 +159,6 @@ const unsubButton = document.querySelector(".unsub");
 unsubButton.addEventListener("click", (e) => {
   console.log("unsubscribing");
   unsubAuth();
-  unsubButton();
   unsubCol();
+  unsubDoc();
 });
