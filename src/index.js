@@ -118,3 +118,6 @@ const loginForm = document.querySelector(".login");
 loginForm.addEventListener("submit", (e) => {
   e.preventDefault();
 });
+
+const logoutButton = document.querySelector(".logout");
+logoutButton.addEventListener("click", () => {});
