@@ -113,3 +113,8 @@ signupForm.addEventListener("submit", (e) => {
       console.log(err.message);
     });
 });
+
+const loginForm = document.querySelector(".login");
+loginForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+});
