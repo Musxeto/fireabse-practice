@@ -98,3 +98,8 @@ updateForm.addEventListener("submit", (e) => {
     updateForm.reset;
   });
 });
+
+const signupForm = document.querySelector(".signup");
+signupForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+});
